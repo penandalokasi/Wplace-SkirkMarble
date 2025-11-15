@@ -63,22 +63,55 @@ inject(() => {
   // Observer to wait for the map to be ready and set window.bmmap
   const observer = new MutationObserver(mutations => {
     try {
-      let map = document.querySelector("div.absolute.bottom-3.right-3.z-30").childNodes[0].__click[3].v
-      if(typeof map.version == "string"){
-        window.bmmap = map;
-        observer.disconnect();
-      }
+      const original = Map.prototype.values;
+      Map.prototype.values = function () {
+        // console.log(`%c${name}%c: Map.prototype.values called`, consoleStyle, '');
+        const temp = original.call(this);
+        const entries = Array.from(temp);
+        // console.log(`%c${name}%c: Found ${entries.length} entries in map`, consoleStyle, '');
+        
+        entries.forEach((x, index) => {
+            // console.log(`%c${name}%c: Entry ${index}:`, consoleStyle, '', x);
+            // console.log(x['maps'])
+            if (x && x['maps']) {
+                Array.from(x['maps']).forEach((y, mapIndex) => {
+                    // console.log(`%c${name}%c: Map ${mapIndex}:`, consoleStyle, '', y);
+                    
+                    // console.log(`%c${name}%c: y['flyTo']`, consoleStyle, '', y['flyTo']);
+                    // console.log(`%c${name}%c: y.flyTo`, consoleStyle, '', y.flyTo);
+                    if(y){
+                      var flyTo = y.flyTo || y['flyTo'];
+                      if (flyTo) {
+                          console.log(`%c${name}%c: Found map with flyTo! Capturing...`, consoleStyle, '', y);
+                          window.bmmap = y;
+                          Map.prototype.values = original;
+                          observer.disconnect();
+                      }
+                      else {
+                        console.log(`%c${name}%c: flyTo not found...`, consoleStyle, '', y);
+                      }
+                    }
+                });
+            }
+            else {
+              console.log(`%c${name}%c: map not instance of Set...`, consoleStyle, '', x);
+            }
+        });
+        
+        return temp;
+      };
     }
     catch (e){
-
+      console.log(e);
     }
+    observer.disconnect();
   });
 
   observer.observe(document.body, {
     childList: true,
     subtree: true
   });
-
+  
   window.addEventListener('message', (event) => {
     const { source, endpoint, blobID, blobData, blink } = event.data;
 
