@@ -7,6 +7,16 @@ This repository is a fork of [https://github.com/Seris0/Wplace-SkirkMarble/](htt
 The install script for this fork is located at:
 https://github.com/bakablah/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js - click <a href="https://github.com/bakablah/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js">here</a> to install
 
+<h2>Update history</h2>
+<ol>
+  <li>wplace have updated the underlying function that powers the 'flyTo' functionality in error pixel navigation, fixed in 0.91.1</li>
+  <ol>
+    <li>
+      (note: for 'flyTo' to work, you'll need to have clicked at least 2 pixels on the map for the script to retrieve the function from wplace)
+    </li>
+  </ol>
+</ol>
+
 <h1>Skirk Marble</h1>
 <a href="https://status.wplace.lol" target="_blank" rel="noopener noreferrer"><img alt="Wplace Status" src="https://status.wplace.lol/badge/_/status?labelColor=5f5f5f&color=&style=flat&label=Wplace%20Status"></a>
 <a href="" target="_blank" rel="noopener noreferrer"><img alt="Latest Version" src="https://img.shields.io/badge/Latest_Version-0.86.0-lightblue?style=flat"></a>
