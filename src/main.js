@@ -65,15 +65,22 @@ inject(() => {
     try {
       const original = Map.prototype.values;
       Map.prototype.values = function () {
-        // console.log(`%c${name}%c: Map.prototype.values called`, consoleStyle, '');
+        // console.log(`%c${name}%c: Map.prototype.values called`, consoleStyle, '', this);
+        if (Array.from(this).some(arr => arr.some(x => x && x.color))) {
+          // console.log('just return original call')
+          return original.call(this);
+        }
         const temp = original.call(this);
+        // console.log(`%c${name}%c: temp value`, consoleStyle, '',temp);
         const entries = Array.from(temp);
-        // console.log(`%c${name}%c: Found ${entries.length} entries in map`, consoleStyle, '');
-        
+        // console.log(`%c${name}%c: entries value`, consoleStyle, '',entries);
+        if(entries && entries.filter(x=>x['maps'] instanceof Set).length == 0) {
+          return temp;
+        }
         entries.forEach((x, index) => {
             // console.log(`%c${name}%c: Entry ${index}:`, consoleStyle, '', x);
             // console.log(x['maps'])
-            if (x && x['maps']) {
+            if (x && x['maps'] instanceof Set) {
                 Array.from(x['maps']).forEach((y, mapIndex) => {
                     // console.log(`%c${name}%c: Map ${mapIndex}:`, consoleStyle, '', y);
                     
@@ -94,17 +101,16 @@ inject(() => {
                 });
             }
             else {
-              console.log(`%c${name}%c: map not instance of Set...`, consoleStyle, '', x);
+              console.log(`%c${name}%c: map not instance of Set...`, consoleStyle, '', x);   
+              return temp;
             }
         });
-        
         return temp;
       };
     }
     catch (e){
       console.log(e);
     }
-    observer.disconnect();
   });
 
   observer.observe(document.body, {
@@ -242,6 +248,7 @@ inject(() => {
     return response; // Returns the original response
   };
 });
+
 
 // Imports the CSS file from dist folder on github
 const cssOverlay = GM_getResourceText("CSS-BM-File");
