@@ -3095,4 +3095,50 @@ export default class TemplateManager {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
+  
+  /** Gets the template color at specific tile/pixel coordinates
+   * @param {Array<string>} coordsTile - Tile coordinates [x, y]
+   * @param {Array<string>} coordsPixel - Pixel coordinates [x, y]
+   * @returns {Object|null} Color object {r, g, b} or null if no template
+   */
+  getTemplateColorAt(coordsTile, coordsPixel) {
+    try {
+      const template = this.templatesArray?.[0];
+      if (!template?.chunked) return null;
+      
+      // Find matching template tile using same logic as drawTemplateOnTile
+      const tileCoords = `${coordsTile[0].padStart(4, '0')},${coordsTile[1].padStart(4, '0')}`;
+      const matchingTileKey = Object.keys(template.chunked).find(key => key.startsWith(tileCoords));
+      
+      if (!matchingTileKey) return null;
+      
+      const bitmap = template.chunked[matchingTileKey];
+      if (!bitmap) return null;
+      
+      // Get template pixel coordinates within the tile
+      const coords = matchingTileKey.split(',');
+      const templateOffsetX = parseInt(coords[2]) * this.drawMult;
+      const templateOffsetY = parseInt(coords[3]) * this.drawMult;
+      
+      // Calculate position within template bitmap (center pixel of 3x3 block)
+      const templateX = (parseInt(coordsPixel[0]) * this.drawMult) - templateOffsetX + 1;
+      const templateY = (parseInt(coordsPixel[1]) * this.drawMult) - templateOffsetY + 1;
+      
+      const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(bitmap, 0, 0);
+      
+      if (templateX >= 0 && templateY >= 0 && templateX < bitmap.width && templateY < bitmap.height) {
+        const imageData = ctx.getImageData(templateX, templateY, 1, 1);
+        const [r, g, b, a] = imageData.data;
+        return a >= 64 ? { r, g, b } : null;
+      }
+      
+      return null;
+    } catch (error) {
+      console.warn('Failed to get template color:', error);
+      return null;
+    }
+  }
 }
