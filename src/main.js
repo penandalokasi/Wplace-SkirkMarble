@@ -65,33 +65,33 @@ inject(() => {
     try {
       const original = Map.prototype.values;
       Map.prototype.values = function () {
-        // console.log(`%c${name}%c: Map.prototype.values called`, consoleStyle, '', this);
+        // if this is a pixel placement request by having 'color' in payload, ignore and continue
         if (Array.from(this).some(arr => arr.some(x => x && x.color))) {
           // console.log('just return original call')
           return original.call(this);
         }
+        // getting the response from call
         const temp = original.call(this);
-        // console.log(`%c${name}%c: temp value`, consoleStyle, '',temp);
+        // convert Entries into Array
         const entries = Array.from(temp);
-        // console.log(`%c${name}%c: entries value`, consoleStyle, '',entries);
+        // check if entires does not contain maps, exits 
         if(entries && entries.filter(x=>x['maps'] instanceof Set).length == 0) {
           return temp;
         }
         entries.forEach((x, index) => {
-            // console.log(`%c${name}%c: Entry ${index}:`, consoleStyle, '', x);
-            // console.log(x['maps'])
             if (x && x['maps'] instanceof Set) {
                 Array.from(x['maps']).forEach((y, mapIndex) => {
-                    // console.log(`%c${name}%c: Map ${mapIndex}:`, consoleStyle, '', y);
-                    
-                    // console.log(`%c${name}%c: y['flyTo']`, consoleStyle, '', y['flyTo']);
-                    // console.log(`%c${name}%c: y.flyTo`, consoleStyle, '', y.flyTo);
                     if(y){
+                      // if 'flyTo' exists in map object
                       var flyTo = y.flyTo || y['flyTo'];
                       if (flyTo) {
+                          // this is the map object we want
                           console.log(`%c${name}%c: Found map with flyTo! Capturing...`, consoleStyle, '', y);
+                          // set map to window.bmmap so flyTo can work
                           window.bmmap = y;
+                          // reset Map prototype to original value
                           Map.prototype.values = original;
+                          // exits observer now that we have found our map
                           observer.disconnect();
                       }
                       else {

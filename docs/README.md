@@ -17,7 +17,7 @@ https://github.com/bakablah/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMar
   </ol>
   <li>Added current colour vs template colour name & correct/wrong indicator on popup when clicking on a pixel. Added in 0.91.2
   </li>
-  <li>Discovered an issue where 'flyTo' fixes interfers users place pixel placement if it was their first interaction with the page, causing placement requests subsequently not going through to wplace. Fixed in 0.91.3
+  <li>Discovered an issue where 'flyTo' fixes interfers with users pixel placement if it was their first interaction with the page, causing placement requests subsequently not going through to wplace. Fixed in 0.91.3
   </li>
 </ol>
 
