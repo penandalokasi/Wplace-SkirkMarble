@@ -5675,7 +5675,9 @@ function buildColorFilterOverlay() {
       const isFreeColor = colorInfo.free;
       const isDisabled = currentTemplate.isColorDisabled(rgb);
       const isEnhanced = currentTemplate.isColorEnhanced ? currentTemplate.isColorEnhanced(rgb) : false;
-      
+      if(isEnhanced) {
+        console.log('Enhanced Colour: ', rgb);
+      }
       // Add data attributes for search functionality
       colorItem.setAttribute('data-color-item', 'true');
       colorItem.setAttribute('data-color-name', colorInfo.name);

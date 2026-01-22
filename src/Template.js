@@ -509,6 +509,7 @@ export default class Template {
    * @since 1.0.0
    */
   async createEnhancedTiles(originalTiles) {
+    console.log('start createEnhancedTiles');
     const enhancedTiles = new Map();
     
     for (const [tileKey, originalBitmap] of Object.entries(originalTiles)) {
