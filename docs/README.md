@@ -1,3 +1,5 @@
+I will NOT be developing this code further. This is just a quick fix (literally just replacing 'tiles' with 'tile') until Baka fixes their script. As I said, I used the replaced tools. If it breaks something, then it is what it is. From my quick testing, it's working fine.
+
 <h1>Fork Notice</h1>
 
 <h2>Note: Ensure Blue Marble is uninstalled first before attempting to install Skirk Marble!</h2>
@@ -171,5 +173,6 @@ https://github.com/penandalokasi/Wplace-SkirkMarble/raw/refs/heads/main/dist/Ski
       </p>
     </p>
   </p>
+
 
 
