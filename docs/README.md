@@ -5,7 +5,7 @@
 This repository is a fork of [https://github.com/Seris0/Wplace-SkirkMarble/](https://github.com/Seris0/Wplace-SkirkMarble/).
 
 The install script for this fork is located at:
-https://github.com/bakablah/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js - click <a href="https://github.com/bakablah/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js">here</a> to install
+https://github.com/penandalokasi/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js - click <a href="https://github.com/penandalokasi/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js">here</a> to install
 
 <h2>Update history</h2>
 <ol>
@@ -171,4 +171,5 @@ https://github.com/bakablah/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMar
       </p>
     </p>
   </p>
+
 
