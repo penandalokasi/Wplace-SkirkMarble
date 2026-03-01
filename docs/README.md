@@ -1,4 +1,6 @@
-I will NOT be developing this code further. This is a quick fix (literally just replacing 'tiles' with 'tile') until Baka fixes their script. As I said, I used the replaced tools. I reviewed NOTHING. If it breaks something, then it is what it is. From my quick testing, it's working fine. If you have active templates, delete them and create new ones, since the existing templates no longer work. Click <a href="https://github.com/penandalokasi/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js">here</a> to install.
+WPlace rolled back the changes (as they should have). This script is now broken. I’ll leave it here just in case they mess things up again.
+
+~~I will NOT be developing this code further. This is a quick fix (literally just replacing 'tiles' with 'tile') until Baka fixes their script. As I said, I used the replaced tools. I reviewed NOTHING. If it breaks something, then it is what it is. From my quick testing, it's working fine. If you have active templates, delete them and create new ones, since the existing templates no longer work. Click <a href="https://github.com/penandalokasi/Wplace-SkirkMarble/raw/refs/heads/main/dist/SkirkMarble.user.js">here</a> to install.~~
 
 
 <h1>Fork Notice</h1>
@@ -174,6 +176,7 @@ https://github.com/penandalokasi/Wplace-SkirkMarble/raw/refs/heads/main/dist/Ski
       </p>
     </p>
   </p>
+
 
 
 
